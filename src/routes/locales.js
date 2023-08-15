@@ -1,15 +1,18 @@
 import { Router } from "express";
 import Locales from "../services/locales.js"
+import { validate } from "../middlewares/validations/validateService.js";
 const router = Router()
 
-router.post('/agregar', Locales.postLocal)
+router.post('/agregar', validate(Locales.postLocal))
 
-router.get('/obtener', Locales.getLocal)
+router.get('/obtener', validate(Locales.getLocal))
 
-router.put('/actualizar/:id', Locales.putLocal)
+router.put('/actualizar/:id', validate(Locales.putLocal))
 
-router.delete('/eliminar/:id', Locales.deleteLocal)
+router.delete('/eliminar/:id', validate(Locales.deleteLocal))
 
-router.get('/obtener/:id', Locales.getLocalById)
+router.get('/obtener/:id', validate(Locales.getLocalById))
+
+router.post('/:id/producto', validate(Locales.postProductoLocal))
 
 export { router };

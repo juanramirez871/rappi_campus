@@ -137,6 +137,12 @@ db.createCollection("locales",
                             respuesta: { bsonType: "string", description: "La respuesta del FAQ es obligatoria y debe ser de tipo string." }
                         }
                     }
+                },
+                productos: {
+                    bsonType: "array",
+                    items: {
+                        bsonType: "object",
+                    }
                 }
             }
         }
@@ -170,47 +176,7 @@ db.locales.insertMany([
                 pregunta: "alguna pregunta",
                 respuesta: "alguna respuesta"
             }
-        ]
-    }
-])
-
-db.createCollection("productos",
-{
-    validator: {
-        $jsonSchema: {
-            bsonType: "object",
-            required: ["localId", "productos"],
-            properties: {
-                localId: { bsonType: "objectId", description: "El localId es obligatorio y debe ser un ObjectId válido." },
-                productos: {
-                    bsonType: "array",
-                    items: {
-                        bsonType: "object",
-                        required: ["name", "precio", "descripcion", "descuento", "categorias", "tiempoEstimado", "costoEnvio"],
-                        properties: {
-                            name: { bsonType: "string", description: "El nombre del producto es obligatorio y debe ser de tipo string." },
-                            precio: { bsonType: "int", minimum: 0, description: "El precio del producto es obligatorio y debe ser un número mayor o igual a 0." },
-                            descripcion: { bsonType: "string", description: "La descripción del producto es obligatoria y debe ser de tipo string." },
-                            descuento: { bsonType: "int", minimum: 0, description: "El descuento del producto debe ser un número" },
-                            categorias: {
-                                bsonType: "array",
-                                items: { bsonType: "string", description: "Las categorías deben ser una matriz de strings." }
-                            },
-                            tiempoEstimado: { bsonType: "int", minimum: 0, description: "El tiempo estimado del producto es obligatorio y debe ser un número entero mayor o igual a 0." },
-                            costoEnvio: { bsonType: "int", minimum: 0, description: "El costo de envío del producto es obligatorio y debe ser un número mayor o igual a 0." }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-)
-
-db.productos.insertMany([
-    {
-        localId: ObjectId("64d26d1e0900c20b3b9db0e8"),
+        ],
         productos: [
             {
                 name: "producto 1",
@@ -224,6 +190,7 @@ db.productos.insertMany([
         ]
     }
 ])
+
 
 db.createCollection("pedidos", 
 {
