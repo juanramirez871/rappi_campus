@@ -16,7 +16,7 @@ export default class Locales {
         res.status(200).json(consulta)
     }
     static async deleteLocal(req, res) {
-        let consulta = await locales.deleteOne({ _id: new ObjectId(req.params.id) })
+        let consulta = await locales.updateOne({ _id: new ObjectId(req.params.id) }, { $set: { activo: 0 } })
         res.status(200).json(consulta)
     }
     static async getLocalById(req, res) {
