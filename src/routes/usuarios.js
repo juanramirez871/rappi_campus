@@ -8,4 +8,6 @@ router.get('/get', Usuarios.getUsuarios)
 
 router.put('/put/:id', Usuarios.putUsuarios)
 
+router.delete('/delete/:id', Usuarios.deleteUsuarios)
+
 export { router };
