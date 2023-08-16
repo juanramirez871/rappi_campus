@@ -6,5 +6,6 @@ router.post('/post', Usuarios.postUsuarios)
 
 router.get('/get', Usuarios.getUsuarios)
 
+router.put('/put/:id', Usuarios.putUsuarios)
 
 export { router };
