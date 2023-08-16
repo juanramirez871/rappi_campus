@@ -18,5 +18,8 @@ export default class Usuarios {
         let consulta = await usuarios.updateOne({ _id: new ObjectId(req.params.id) }, { $set: { activo: 0 } })
         res.status(200).json(consulta)
     }
-    
+    static async getUsuariosById(req, res) {
+        let consulta = await usuarios.findOne({ _id: new ObjectId(req.params.id) })
+        res.status(200).json(consulta)
+    }
 }

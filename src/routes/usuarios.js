@@ -10,4 +10,6 @@ router.put('/put/:id', Usuarios.putUsuarios)
 
 router.delete('/delete/:id', Usuarios.deleteUsuarios)
 
+router.get('/get/:id', Usuarios.getUsuariosById)
+
 export { router };
