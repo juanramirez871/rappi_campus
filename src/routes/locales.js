@@ -1,9 +1,12 @@
 import { Router } from "express";
 import Locales from "../services/locales.js"
-import { validate } from "../middlewares/validations/validateService.js";
+import { validate } from "../validations/validateService.js";
+import middlewareDTO from "../middlewares/middlewareDTO.js"
+import { DTOlocales } from "../controller/DTOlocales.js"
+
 const router = Router()
 
-router.post('/agregar', validate(Locales.postLocal))
+router.post('/agregar', middlewareDTO(DTOlocales), validate(Locales.postLocal))
 
 router.get('/obtener', validate(Locales.getLocal))
 
