@@ -2,14 +2,14 @@ import { Router } from "express";
 import Usuarios from "../services/usuarios.js";
 const router = Router()
 
-router.post('/post', Usuarios.postUsuarios)
+router.post('/', Usuarios.postUsuarios)
 
-router.get('/get', Usuarios.getUsuarios)
+router.get('/', Usuarios.getUsuarios)
 
-router.put('/put/:id', Usuarios.putUsuarios)
+router.put('/:id', Usuarios.putUsuarios)
 
-router.delete('/delete/:id', Usuarios.deleteUsuarios)
+router.delete('/:id', Usuarios.deleteUsuarios)
 
-router.get('/get/:id', Usuarios.getUsuariosById)
+router.get('/:id', Usuarios.getUsuariosById)
 
 export { router };
