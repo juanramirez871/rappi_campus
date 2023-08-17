@@ -2,10 +2,9 @@ import express from "express"
 import rateLimit from "./config/rateLimit.js";
 import routeIndex from "./routes/index.js";
 import "dotenv/config.js";
-
 const app = express();
+app.use(express.json());
 const PORT = process.env.PORT || 3000;
-
 app
     .use(rateLimit)
 
