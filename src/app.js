@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 3000;
 app
     .use(rateLimit)
 
+    .use(express.json())
+
     .use("/api", routeIndex)
 
     .listen(PORT, ()=> {
