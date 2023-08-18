@@ -6,7 +6,6 @@ import {validate} from 'class-validator';
 const middlewareDTO = (classDto) => async(req, res, next) => {
     try {
         let data = plainToClass(classDto, req.body, { excludeExtraneousValues: true });
-        req.body = data;
         await validate(data);
         next();
     } catch (err) {

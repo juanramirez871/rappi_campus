@@ -8,15 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Expose } from 'class-transformer';
-import { IsDefined, IsString, ValidateNested } from 'class-validator';
+import { IsDefined, IsNumber, IsString, IsObject } from 'class-validator';
 export class DTOlocales {
-    constructor(nombre, departamento, barrio, comentario, clave) {
+    constructor(nombre, direccion, estrellas) {
         this.nombre = nombre;
-        this.departamento = departamento;
-        this.barrio = barrio;
-        this.comentario = comentario;
-        this.clave = clave;
-        this.direccion = { departamento, barrio, comentario, clave };
+        this.direccion = direccion;
+        this.estrellas = estrellas;
     }
 }
 __decorate([
@@ -26,32 +23,14 @@ __decorate([
     __metadata("design:type", String)
 ], DTOlocales.prototype, "nombre", void 0);
 __decorate([
-    Expose({ name: 'departamento' }),
-    IsString({ message: () => { throw { status: 406, message: `La departamento no cumple con el formato` }; } }),
-    IsDefined({ message: () => { throw { status: 422, message: `La parametro departamento es obligatorio` }; } }),
-    __metadata("design:type", String)
-], DTOlocales.prototype, "departamento", void 0);
-__decorate([
-    Expose({ name: 'barrio' }),
-    IsString({ message: () => { throw { status: 406, message: `El barrio no cumple con el formato` }; } }),
-    IsDefined({ message: () => { throw { status: 422, message: `El parametro barrio es obligatorio` }; } }),
-    __metadata("design:type", String)
-], DTOlocales.prototype, "barrio", void 0);
-__decorate([
-    Expose({ name: 'comentario' }),
-    IsString({ message: () => { throw { status: 406, message: `El comentario no cumple con el formato` }; } }),
-    IsDefined({ message: () => { throw { status: 422, message: `El parametro comentario es obligatorio` }; } }),
-    __metadata("design:type", String)
-], DTOlocales.prototype, "comentario", void 0);
-__decorate([
-    Expose({ name: 'clave' }),
-    IsString({ message: () => { throw { status: 406, message: `La clave no cumple con el formato` }; } }),
-    IsDefined({ message: () => { throw { status: 422, message: `La parametro es obligatorio` }; } }),
-    __metadata("design:type", String)
-], DTOlocales.prototype, "clave", void 0);
-__decorate([
     Expose({ name: 'direccion' }),
-    ValidateNested({ each: true }),
-    IsDefined({ message: 'La direccion es obligatoria' }),
+    IsObject({ message: () => { throw { status: 406, message: `La direccion no cumple con el formato` }; } }),
+    IsDefined({ message: () => { throw { status: 422, message: `El parametro direccion es obligatorio` }; } }),
     __metadata("design:type", Object)
 ], DTOlocales.prototype, "direccion", void 0);
+__decorate([
+    Expose({ name: 'estrellas' }),
+    IsNumber({}, { message: () => { throw { status: 406, message: `Las estrellas no cumple con el formato` }; } }),
+    IsDefined({ message: () => { throw { status: 422, message: `El parametro estrellas es obligatorio` }; } }),
+    __metadata("design:type", Number)
+], DTOlocales.prototype, "estrellas", void 0);
