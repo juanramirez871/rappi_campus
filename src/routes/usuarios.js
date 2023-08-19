@@ -1,15 +1,16 @@
 import { Router } from "express";
 import Usuarios from "../services/usuarios.js";
+import { validate } from "../middlewares/validations/validateService.js";
 const router = Router()
 
-router.post('/', Usuarios.postUsuarios)
+router.post('/', validate(Usuarios.postUsuarios))
 
-router.get('/', Usuarios.getUsuarios)
+router.get('/', validate(Usuarios.getUsuarios))
 
-router.put('/:id', Usuarios.putUsuarios)
+router.put('/:id', validate(Usuarios.putUsuarios))
 
-router.delete('/:id', Usuarios.deleteUsuarios)
+router.delete('/:id', validate(Usuarios.deleteUsuarios))
 
-router.get('/:id', Usuarios.getUsuariosById)
+router.get('/:id', validate(Usuarios.getUsuariosById))
 
 export { router };
