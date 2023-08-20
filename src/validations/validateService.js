@@ -13,7 +13,7 @@ export const validate = (fn) => (req, res, next) => {
                 if (err.errInfo && err.errInfo.details) {
                     res.status(400).json({ msg: 'Error en la validacion en los campos', error: "campos requeridos: " + err.errInfo.details.schemaRulesNotSatisfied[0].missingProperties.join(", ") });
                 } else {
-                    res.status(400).json({ msg: 'Error en la validacion en los campos', error: err.message });
+                    res.status(400).json({ msg: 'Error de MongoDB', error: err.message });
                 }
             }
             }else{

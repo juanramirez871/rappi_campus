@@ -1,6 +1,6 @@
 import { Router } from "express";
 import Locales from "../services/locales.js"
-import { validate } from "../middlewares/validations/validateService.js";
+import { validate } from "../validations/validateService.js";
 const router = Router()
 
 router.post('/agregar', validate(Locales.postLocal))
