@@ -34,4 +34,13 @@ export default class Locales {
         const consulta = await locales.updateOne({ _id: new ObjectId(req.params.id) }, { $push: { productos: req.body } })
         res.status(200).json({ data: consulta, msg: "consulta exitosa"})
     }
+
+    static async getLocalesByCategory(req, res){
+
+        if(!req.body?.categorias?.[0]) res.status(400).json({ status: 400, msg: "categorias es requerido y de tipo array"});
+        else {
+            const consulta = await locales.find({ categorias: { $in: req.body.categorias } }).toArray();
+            res.status(200).json({ data: consulta, msg: "consulta exitosa"})
+        }
+    }
 }

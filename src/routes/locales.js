@@ -15,4 +15,6 @@ router.get('/obtener/:id', validate(Locales.getLocalById))
 
 router.post('/:id/producto', validate(Locales.postProductoLocal))
 
+router.get('/categorias', validate(Locales.getLocalesByCategory))
+
 export { router };
