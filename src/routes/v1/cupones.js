@@ -1,6 +1,6 @@
 import { Router } from "express";
-import Cupones from "../services/cupones.js";
-import { validate } from "../validations/validateService.js";
+import Cupones from "../../services/cupones.js";
+import { validate } from "../../validations/validateService.js";
 const router = Router()
 
 router.post('/', validate(Cupones.postCupones))

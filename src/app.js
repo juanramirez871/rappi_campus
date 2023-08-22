@@ -10,7 +10,10 @@ app
 
     .use(express.json())
 
-    .use("/api", routeIndex)
+    .use(async(req, res, next) => {
+        app.use("/api", await routeIndex(req.header('Accept-version') || "v1"));
+        next()
+    })
 
     .listen(PORT, ()=> {
         console.log(`server in http://127.10.10.10:${PORT}`);
