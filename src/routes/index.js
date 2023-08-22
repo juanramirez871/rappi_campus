@@ -18,7 +18,6 @@ const loadModules = async (version) => {
     else PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname);
     PATH_ROUTERS += `/${version}`;
     const filesNames = readdirSync(PATH_ROUTERS);
-
     const importPromises = filesNames.map(async (fileName) => {
         const cleanName = cleanFile(fileName);
         if (cleanName !== "index") {

@@ -11,7 +11,11 @@ app
     .use(express.json())
 
     .use(async(req, res, next) => {
-        app.use("/api", await routeIndex(req.header('Accept-version') || "v1"));
+        try{
+            app.use("/api", await routeIndex(req.header('Accept-version') || "v1"));
+        }catch{
+            res.status(400).json({status: 400, message: "Vercion de la api especificada no existe"});
+        }
         next()
     })
 
