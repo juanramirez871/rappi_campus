@@ -30,7 +30,7 @@ export default class Locales {
     }
 
     static async postProductoLocal(req, res){
-
+        req.body._id = new ObjectId();
         const consulta = await locales.updateOne({ _id: new ObjectId(req.params.id) }, { $push: { productos: req.body } })
         res.status(200).json({ data: consulta, msg: "consulta exitosa"})
     }
