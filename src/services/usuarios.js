@@ -1,4 +1,5 @@
 import db from '../config/mongodb.js';
+import { ObjectId } from 'mongodb';
 import bcrypt from "bcrypt";
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
 
@@ -23,5 +24,15 @@ export default class Usuarios {
     static async getUsuariosById(req, res) {
         let consulta = await usuarios.findOne({ _id: new ObjectId(req.params.id) })
         res.status(200).json(consulta)
+    }
+    static async getPedidosByUsuarioId(req, res) {
+        const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        let consultaUsuarios = await usuarios.find({ _id: new ObjectId(req.params.id) }).toArray()
+        let consultaPedidos = await pedidos.find({ usuarioId: new ObjectId(req.params.id) }).toArray()
+        const result = {
+            usuario: consultaUsuarios,
+            pedidos: consultaPedidos
+        };
+        res.status(200).json(result)
     }
 }
