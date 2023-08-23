@@ -1,5 +1,5 @@
 import db from '../config/mongodb.js';
-import { CURSOR_FLAGS, ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import bcrypt from "bcrypt";
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
 
