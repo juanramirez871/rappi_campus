@@ -6,7 +6,9 @@ import routesVersioning  from 'express-routes-versioning';
 const router = Router()
 const versiones = routesVersioning()
 
-router.get('/obtener', versiones({ "1.0.0": validate(Locales.getLocal),"1.0.1": Locales.getLocalById }));
+router.get('/obtener', versiones({ "^1.0.0": validate(Locales.getLocal) }));
+
+router.get('/obtener/:id', versiones({ "^1.0.0": validate(Locales.getLocalById) }));
 
 router.get('/categorias', versiones({ "^1.0.0": validate(Locales.getLocalesByCategory) }));
 

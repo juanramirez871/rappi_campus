@@ -1,9 +1,12 @@
 import { Router } from "express";
 import Cupones from "../../services/cupones.js";
 import { validate } from "../../validations/validateService.js";
-const router = Router()
+import routesVersioning  from 'express-routes-versioning';
 
-router.post('/', validate(Cupones.postCupones))
+const router = Router()
+const versiones = routesVersioning()
+
+router.post('/', versiones({ "^1.0.0": validate(Cupones.postCupones) }));
 
 
 export { router };
