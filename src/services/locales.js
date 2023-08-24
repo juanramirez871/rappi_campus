@@ -9,7 +9,7 @@ export default class Locales {
         res.status(200).json({ data: consulta, msg: "consulta exitosa"})
     }
 
-    static async getLocal(req, res) {
+    static async getLocal(req, res, next) {
         const consulta = await locales.find({}).toArray()
         res.status(200).json({ data: consulta, msg: "consulta exitosa"})
     }
