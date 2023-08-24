@@ -16,13 +16,13 @@ const loadModules = async (version) => {
     
     if(platform == "win32") PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname).replace(/^\/(\w\:)/, '$1');
     else PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname);
-    PATH_ROUTERS += `/${version}`;
+    PATH_ROUTERS += `/v${(version.split("."))[0]}`;
     const filesNames = readdirSync(PATH_ROUTERS);
     const importPromises = filesNames.map(async (fileName) => {
         const cleanName = cleanFile(fileName);
         if (cleanName !== "index") {
             try {
-                const moduleRouter = await import(`./${version}/${fileName}`);
+                const moduleRouter = await import(`./v${(version.split("."))[0]}/${fileName}`);
                 if (moduleRouter.router) {
                     router.use(`/${cleanName}`, moduleRouter.router);
                 }

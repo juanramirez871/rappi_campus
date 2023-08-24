@@ -4,7 +4,12 @@ import { validate } from "../../validations/validateService.js";
 
 const router = Router()
 
-router.post('/agregar', validate(Locales.postLocal))
+
+// router.get('/:id', routesVersioning({
+//     "^1.1.1": ,
+// }));
+
+router.post('/agregar', Locales.postLocal)
 
 router.get('/obtener', validate(Locales.getLocal))
 

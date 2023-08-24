@@ -12,7 +12,7 @@ app
 
     .use(async(req, res, next) => {
         try{
-            app.use("/api", await routeIndex(req.header('Accept-version') || "v1"));
+            app.use("/api", await routeIndex(req.header('Accept-version') || "1.0.0"));
         }catch{
             res.status(400).json({status: 400, message: "Vercion de la api especificada no existe"});
         }
