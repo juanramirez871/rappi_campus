@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb"
+
 use("rappi-campus")
 
 db.createCollection("usuarios",
@@ -5,7 +7,7 @@ db.createCollection("usuarios",
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["nombres", "edad", "password", "email", "vip", "role", "activo"],
+            required: ["nombres", "edad", "password", "email", "vip", "role"],
             properties: {
                 nombres: {
                     bsonType: "object",
@@ -91,6 +93,8 @@ db.cupones.insertMany([
     }
 ])
 
+use("rappi-campus")
+
 db.createCollection("locales", 
 {
     validator: {
@@ -155,6 +159,7 @@ db.createCollection("locales",
 db.locales.insertMany([
     {
         nombre: "local 1",
+        adminId: ObjectId("64d26d1e0900c20b3b9db0e8"),
         direccion: {
             departamento: "santander",
             barrio: "san carlos",
@@ -179,6 +184,7 @@ db.locales.insertMany([
         ],
         productos: [
             {
+                _id: new ObjectId(),
                 name: "producto 1",
                 precio: 100,
                 descripcion: "alguna descripcion",
@@ -191,7 +197,7 @@ db.locales.insertMany([
     }
 ])
 
-
+use("rappi-campus")
 db.createCollection("pedidos", 
 {
     validator: {
@@ -199,16 +205,16 @@ db.createCollection("pedidos",
             bsonType: "object",
             required: ["usuarioId", "productos", "costoTotal", "descuentoTotal", "fechaPedido", "tiempoFinalEntrega", "domiciliarioId", "estado"],
             properties: {
-                usuarioId: { bsonType: "objectId", description: "El usuarioId es obligatorio y debe ser un ObjectId válido." },
+                usuarioId: { bsonType: "string", description: "El usuarioId es obligatorio y debe ser un string válido." },
                 productos: {
                     bsonType: "array",
-                    items: { bsonType: "objectId", description: "Los productos deben ser una matriz de ObjectIds válidos." }
+                    items: { bsonType: "string", description: "Los productos deben ser una matriz de string válidos." }
                 },
                 costoTotal: { bsonType: "int", minimum: 0, description: "El costo total es obligatorio y debe ser un número mayor o igual a 0." },
                 descuentoTotal: { bsonType: "int", minimum: 0, description: "El descuento total es obligatorio y debe ser un número mayor o igual a 0." },
                 fechaPedido: { bsonType: "string",  description: "La fecha del pedido es obligatoria y debe estar en el M-DD'." },
                 tiempoFinalEntrega: { bsonType: "string",  description: "El tiempo final de entrega es obligatorio y debe estar en el M-DD'." },
-                domiciliarioId: { bsonType: "objectId", description: "El domiciliarioId es obligatorio y debe ser un ObjectId válido." },
+                domiciliarioId: { bsonType: "string", description: "El domiciliarioId es obligatorio y debe ser un string válido." },
                 estado: { bsonType: "int", description: "El estado del pedido es obligatorio." }
             }
         }
@@ -217,15 +223,18 @@ db.createCollection("pedidos",
 
 )
 
+use("rappi-campus")
+
 db.pedidos.insertMany([
     {
-        usuarioId: ObjectId("64d26d1e0900c20b3b9db0e8"),
-        productos: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
-        costoTotal: 100,
+        usuarioId: "64e671414b80b86d797760c1",
+        localId: "64e676c0aae9ada8e08ac734",
+        productos: ["64e678bf03f53f7aa07ee2ce"],
+        costoTotal: 100000,
         descuentoTotal: 20,
         fechaPedido: "2023-03-04",
         tiempoFinalEntrega: "2209-03-02",
-        domiciliarioId: ObjectId("64d26d1e0900c20b3b9db0e8"),
+        domiciliarioId: "64d26d1e0900c20b3b9db0e8",
         estado: 4
     }
 ])
