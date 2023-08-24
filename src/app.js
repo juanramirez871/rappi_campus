@@ -10,7 +10,14 @@ app
 
     .use(express.json())
 
-    .use("/api", routeIndex)
+    .use(async(req, res, next) => {
+        try{
+            app.use("/api", await routeIndex(req.header('Accept-version')));
+        }catch{
+            res.status(400).json({status: 400, message: "Vercion de la api especificada no existe"});
+        }
+        next()
+    })
 
     .listen(PORT, ()=> {
         console.log(`server in http://127.10.10.10:${PORT}`);

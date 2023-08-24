@@ -5,8 +5,6 @@ import os from "os";
 
 const platform = os.platform();
 let PATH_ROUTERS;
-if(platform == "win32") PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname).replace(/^\/(\w\:)/, '$1');
-else PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname);
 const router = Router();
 
 const cleanFile = (fileName) => {
@@ -14,14 +12,17 @@ const cleanFile = (fileName) => {
     return file;
 };
 
-const loadModules = async () => {
+const loadModules = async (version) => {
+    
+    if(platform == "win32") PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname).replace(/^\/(\w\:)/, '$1');
+    else PATH_ROUTERS = path.dirname(new URL(import.meta.url).pathname);
+    PATH_ROUTERS += `/v${(version.split("."))[0]}`;
     const filesNames = readdirSync(PATH_ROUTERS);
-
     const importPromises = filesNames.map(async (fileName) => {
         const cleanName = cleanFile(fileName);
         if (cleanName !== "index") {
             try {
-                const moduleRouter = await import(`./${fileName}`);
+                const moduleRouter = await import(`./v${(version.split("."))[0]}/${fileName}`);
                 if (moduleRouter.router) {
                     router.use(`/${cleanName}`, moduleRouter.router);
                 }
@@ -32,8 +33,7 @@ const loadModules = async () => {
     });
 
     await Promise.all(importPromises);
+    return router
 };
 
-loadModules();
-
-export default router;
+export default loadModules;
