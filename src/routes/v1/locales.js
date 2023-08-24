@@ -1,26 +1,27 @@
 import { Router } from "express";
 import Locales from "../../services/locales.js"
 import { validate } from "../../validations/validateService.js";
+import routesVersioning  from 'express-routes-versioning';
 
 const router = Router()
+const versiones = routesVersioning()
+
+router.get('/obtener', versiones({ "1.0.0": validate(Locales.getLocal),"1.0.1": Locales.getLocalById }));
+
+router.get('/categorias', versiones({ "^1.0.0": validate(Locales.getLocalesByCategory) }));
+
+router.post('/agregar', versiones({ "^1.0.0": validate(Locales.postLocal) }));
+
+router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
+
+router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
+
+router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Locales.putLocal) }));
+
+router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));
 
 
-// router.get('/:id', routesVersioning({
-//     "^1.1.1": ,
-// }));
 
-router.post('/agregar', Locales.postLocal)
 
-router.get('/obtener', validate(Locales.getLocal))
-
-router.put('/actualizar/:id', validate(Locales.putLocal))
-
-router.delete('/eliminar/:id', validate(Locales.deleteLocal))
-
-router.get('/obtener/:id', validate(Locales.getLocalById))
-
-router.post('/:id/producto', validate(Locales.postProductoLocal))
-
-router.get('/categorias', validate(Locales.getLocalesByCategory))
 
 export { router };
