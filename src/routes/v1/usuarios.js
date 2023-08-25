@@ -6,8 +6,6 @@ import routesVersioning  from 'express-routes-versioning';
 const router = Router()
 const versiones = routesVersioning()
 
-router.post('/agregar', versiones({ "^1.0.0": validate(Usuarios.postUsuarios) }));
-
 router.get('/obtener', versiones({ "^1.0.1": validate(Usuarios.getUsuarios) }));
 
 router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Usuarios.putUsuarios) }));
