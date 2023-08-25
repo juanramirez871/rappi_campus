@@ -22,11 +22,11 @@ export const validate = (fn) => (req, res, next) => {
                         msg: "error en " + (fn.toString().split("("))[0],
                         error: "Id no se encuentra en la base de datos",
                     })    
-                }
+                }else{
                 res.status(400).json({
                     msg: "error en " + (fn.toString().split("("))[0],
                     error: err.toString(),
-                })
+                })}
             }
         });
 }
