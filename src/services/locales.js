@@ -25,11 +25,11 @@ export default class Locales {
     }
 
     static async getLocalById(req, res) {
-        let {id_local} = req.body;
-        if(!id_local){
+        let {id} = req.params;
+        if(!id){
             res.status(404).send({status:404,message: "Hace falta poner el id_local para buscar por id"})
         }
-        const consulta = await locales.findOne({ _id: new ObjectId(id_local) })
+        const consulta = await locales.findOne({ _id: new ObjectId(id) })
         res.status(200).json({ data: consulta, msg: "consulta exitosa"})
     }
 

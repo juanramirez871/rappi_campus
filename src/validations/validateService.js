@@ -17,6 +17,12 @@ export const validate = (fn) => (req, res, next) => {
                 }
             }
             }else{
+                if(err.toString() == "BSONError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer"){
+                    res.status(400).json({
+                        msg: "error en " + (fn.toString().split("("))[0],
+                        error: "Id no se encuentra en la base de datos",
+                    })    
+                }
                 res.status(400).json({
                     msg: "error en " + (fn.toString().split("("))[0],
                     error: err.toString(),
