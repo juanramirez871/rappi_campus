@@ -18,4 +18,8 @@ router.get('/obtener/:id', versiones({ "^1.0.0": validate(Usuarios.getUsuariosBy
 
 router.get('/obtener/pedidos/:id', versiones({ "^1.0.0": validate(Usuarios.getPedidosByUsuarioId) }));
 
+router.post('/agregar/pedidos', versiones({ "^1.0.0": validate(Usuarios.postUsuarioPedido) }));
+
+router.delete('/eliminar/pedidos/:id/:usuarioId', versiones({ "^1.0.0": validate(Usuarios.deleteUsuarioPedido) }));
+
 export { router };
