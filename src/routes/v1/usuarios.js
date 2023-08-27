@@ -22,4 +22,8 @@ router.post('/agregar/pedidos', versiones({ "^1.0.0": validate(Usuarios.postUsua
 
 router.delete('/eliminar/pedidos/:id/:usuarioId', versiones({ "^1.0.0": validate(Usuarios.deleteUsuarioPedido) }));
 
+router.put('/actualizar/estado/pedido/:id/:usuarioId/:estado', versiones({ "^1.0.0": validate(Usuarios.updateEstadoPedido) }));
+
+router.get('/obtener/recibo/:id/:usuarioId',versiones({ "^1.0.0": validate(Usuarios.getReciboPedido) }));
+
 export { router };
