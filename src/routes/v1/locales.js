@@ -22,6 +22,8 @@ router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Locales.putLocal) }
 
 router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));
 
+router.get('/horarios/:id', versiones({ "^1.0.0": validate(Locales.getHorario) }));
+
 
 
 
