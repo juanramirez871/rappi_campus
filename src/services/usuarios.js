@@ -2,6 +2,8 @@ import db from '../config/mongodb.js';
 import { CURSOR_FLAGS, ObjectId } from 'mongodb';
 import bcrypt from "bcrypt";
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
+const Pedido = db.getInstance().changeCollection('pedidos').connect()
+
 
 export default class Usuarios {
     static async postUsuarios(req, res) {
@@ -92,5 +94,11 @@ export default class Usuarios {
             res.status(200).json(consulta);
         }
         
+    }
+
+    static async countorders(req, res){
+
+        const data = await Pedido.find({ domiciliarioId: req.params.id }).count()
+        res.json({ msg: "domiciliario ha hecho estos domicilios", domicilios: data })
     }
 }

@@ -26,4 +26,6 @@ router.put('/actualizar/estado/pedido/:id/:usuarioId/:estado', versiones({ "^1.0
 
 router.get('/obtener/recibo/:id/:usuarioId',versiones({ "^1.0.0": validate(Usuarios.getReciboPedido) }));
 
+router.get('/domiciliario/:id/pedidos',versiones({ "^1.0.0": validate(Usuarios.countorders) }));
+
 export { router };
