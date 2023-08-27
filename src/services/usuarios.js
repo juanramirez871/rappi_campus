@@ -68,4 +68,17 @@ export default class Usuarios {
             res.status(500).json({ msg: "Error en el servidor" });
         }
     }
+    static async updateEstadoPedido(req, res) {
+        const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        try {
+            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId},{$set: { estado: parseInt(req.params.estado) }});
+            if (consulta.matchedCount === 1) {
+                res.status(200).json({ msg: "Pedido cambio de estado exitosamente" });
+            } else {
+                res.status(404).json({ msg: "Pedido no encontrado o no pertenece al usuario" });
+            }
+        } catch (error) {
+            res.status(500).json({ msg: "Error en el servidor" });
+        }
+    }
 }
