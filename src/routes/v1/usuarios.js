@@ -9,7 +9,7 @@ const versiones = routesVersioning()
 
 router.use(passportHelper.authenticate('bearer', {session: false}));
 
-router.get('/obtener', versiones({ "^1.0.1": validate(Usuarios.getUsuarios) }));
+router.get('/', versiones({ "^1.0.0": validate(Usuarios.getUsuarios) }));
 
 router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Usuarios.putUsuarios) }));
 

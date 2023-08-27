@@ -1,4 +1,3 @@
-export const loginV1 = (req, res, next) => {
-    if(!req.rateLimit) return; 
+export const loginV1 = (req, res) => {
     res.status(req.data.status).send(req.data);
 }
