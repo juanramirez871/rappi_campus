@@ -84,7 +84,13 @@ export default class Usuarios {
     static async getReciboPedido(req, res) {
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
         const consulta = await pedidos.findOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId});
-        consulta.constoConDescuento = consulta.costoTotal-((consulta.costoTotal*consulta.descuentoTotal)/100)
-        res.status(200).json(consulta);
+        if (consulta.descuentoTotal != 0) {
+            consulta.constoConDescuento = consulta.costoTotal-((consulta.costoTotal*consulta.descuentoTotal)/100)
+            res.status(200).json(consulta);
+        }else{
+            consulta.constoConDescuento = consulta.costoTotal
+            res.status(200).json(consulta);
+        }
+        
     }
 }
