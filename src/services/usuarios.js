@@ -95,7 +95,6 @@ export default class Usuarios {
         }
         
     }
-
     static async countorders(req, res){
 
         const data = await Pedido.find({ domiciliarioId: req.params.id }).count()
