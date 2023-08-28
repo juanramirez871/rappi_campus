@@ -9,8 +9,7 @@ const createToken = async(req,res,next)=>{
     if (Object.keys(req.body).length === 0) return res.status(400).send({status: 400, message: "datos no enviados"});
     const encoder = new TextEncoder();
     try {
-        console.log(req.body);
-        const result = await usuario.findOne({ email: req.body.correo, password: req.body.contraseña});
+        await usuario.findOne({ email: req.body.correo, password: req.body.contraseña});
     } catch (error) {
         return res.status(404).send("Usuario no encontrado")
     }

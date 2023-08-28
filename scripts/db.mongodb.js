@@ -77,7 +77,7 @@ db.usuarios.insertMany([
         activo: 1,
         cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
         permisos: {
-            "/usuarios": ["1.0.0","1.0.2"],
+            "/usuarios": ["1.0.0"],
             "/locales": ["1.0.0"]
         }
     },
@@ -122,7 +122,7 @@ db.usuarios.insertMany([
         activo: 1,
         cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
         permisos: {
-            "/usuarios": ["1.0.0","1.0.2"],
+            "/usuarios": ["1.0.0"],
             "/locales": ["1.0.0"]
         }
     }
@@ -163,6 +163,7 @@ db.createCollection("locales",
             required: ["nombre", "direccion", "estrellas", "vip", "categorias", "horario", "activo"],
             properties: {
                 nombre: { bsonType: "string", description: "El nombre del local es obligatorio y debe ser de tipo string." },
+                adminId: { bsonType: "string" },
                 direccion: {
                     bsonType: "object",
                     required: ["departamento", "barrio", "clave"],
@@ -216,7 +217,7 @@ db.createCollection("locales",
 db.locales.insertMany([
     {
         nombre: "local 1",
-        adminId: ObjectId("64e84bc7c5ee534624c7c634"),
+        adminId: "64e84bc7c5ee534624c7c634",
         direccion: {
             departamento: "santander",
             barrio: "san carlos",
@@ -254,7 +255,7 @@ db.locales.insertMany([
     },
     {
         nombre: "local 2",
-        adminId: ObjectId("64e84172e3cd19b03f41cf84"),
+        adminId: "64e84172e3cd19b03f41cf84",
         direccion: {
             departamento: "santander",
             barrio: "san juan",

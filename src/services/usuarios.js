@@ -18,7 +18,7 @@ export default class Usuarios {
         res.status(200).json(consulta)
     }
     static async putUsuarios(req, res) {
-        if((req.body.role)||(req.body.permisos)||(req.body.activo)) return res.status(400).send("No es valido el dat enviado, no se puede cambiar");
+        if((req.body.role)||(req.body.permisos)||(req.body.activo)) return res.status(400).send("No es valido el dato enviado, no se puede cambiar");
         let user = await traerUserLogin(req);
         await usuarios.updateOne({ _id: new ObjectId(user._id.toString()) }, { $set: req.body })
         res.status(200).send({status: 200, message: "Usuario actualizado con exito"})

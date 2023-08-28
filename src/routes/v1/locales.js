@@ -9,22 +9,12 @@ const versiones = routesVersioning()
 
 router.use(passportHelper.authenticate('bearer', {session: false}));
 
-router.get('/obtener', versiones({ "1.0.0": validate(Locales.getLocal),"1.0.1": validate(Locales.getLocal) }));
+router.get('/info', versiones({ "^1.0.0": validate(Locales.getLocalById)}));
 
-router.get('/obtener/:id', versiones({ "^1.0.0": validate(Locales.getLocalById) }));
+router.post('/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
 
-router.get('/categorias', versiones({ "^1.0.0": validate(Locales.getLocalesByCategory) }));
+router.put('/actualizar', versiones({ "^1.0.0": validate(Locales.putLocal)}));
 
-router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
-
-router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
-
-router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Locales.putLocal) }));
-
-router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));
-
-
-
-
+router.delete('/eliminar', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));
 
 export { router };
