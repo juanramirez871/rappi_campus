@@ -39,7 +39,6 @@ const validarToken = async (req, token)=>{
             [`permisos.${baseQuitada}`]: `${req.headers["accept-version"]}`
         });
         let {_id, permisos, ...desdata} = res;
-        console.log(res);
         return desdata;
     } catch (error) {
         return false;

@@ -1,14 +1,16 @@
 import db from '../config/mongodb.js';
-import { CURSOR_FLAGS, ObjectId } from 'mongodb';
-import bcrypt from "bcrypt";
+import { ObjectId } from 'mongodb';
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
 
 export default class Usuarios {
     static async postUsuarios(req, res) {
-        req.body.password = await bcrypt.hash(req.body.password, 10)
-        req.body.activo = 1
-        let consulta = await usuarios.insertOne(req.body)
-        res.status(200).json(consulta)
+        req.body.activo = 1;
+        req.body.role = 0;
+        req.body.permisos = {
+            "/usuarios": ["1.0.0"]
+        }
+        let consulta = await usuarios.insertOne(req.body);
+        res.status(200).json(consulta);
     }
     static async getUsuarios(req, res) {
         let consulta = await usuarios.find({}).toArray()

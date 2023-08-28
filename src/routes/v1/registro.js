@@ -6,6 +6,6 @@ import Usuarios from "../../services/usuarios.js";
 const router = Router();
 const versiones = routesVersioning();
 
-router.post("/", versiones({"^1.0.1": validate(Usuarios.postUsuarios)}));
+router.post("/", versiones({"^1.0.0": validate(Usuarios.postUsuarios)}));
 
 export {router}
