@@ -12,7 +12,7 @@ const createToken = async(req,res,next)=>{
         console.log(req.body);
         const result = await usuario.findOne({ email: req.body.correo, password: req.body.contraseña});
     } catch (error) {
-        return res.status(404).send("Usuario no encontrado.")
+        return res.status(404).send("Usuario no encontrado")
     }
     const result = await usuario.findOne({ email: req.body.correo, password: req.body.contraseña});
     if(!result) return res.status(401).send({status: 401,message: "Usuario no encontrado"});
@@ -25,14 +25,22 @@ const createToken = async(req,res,next)=>{
     req.data = {status: 200,message: jwtConstructor};
     next();
 }
-const validarToken = async (token)=>{
+const validarToken = async (req, token)=>{
     try {
         const encoder = new TextEncoder();
         const jwtData = await jwtVerify(
             token,
             encoder.encode(process.env.JWT_SECRET)
         );
-        return await usuario.findOne({_id: new ObjectId(jwtData.payload.id)});
+        const quitarBaseUrl = "/api";
+        let baseQuitada = req.baseUrl.slice(quitarBaseUrl.length);
+        let res = await usuario.findOne({
+            _id: new ObjectId(jwtData.payload.id),
+            [`permisos.${baseQuitada}`]: `${req.headers["accept-version"]}`
+        });
+        let {_id, permisos, ...desdata} = res;
+        console.log(res);
+        return desdata;
     } catch (error) {
         return false;
     }

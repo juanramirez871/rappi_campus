@@ -183,19 +183,29 @@ db.createCollection("locales",
                     items: {
                         bsonType: "object",
                     }
+                },
+                permisos: { 
+                    bsonType: 'object',
+                    description: "Ingrese los permisos",
+                    properties: {
+                        "/locales": {
+                            bsonType: "array",
+                            items: {
+                                bsonType: "string",
+                                description: "Ingrese la version autorizada",
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-}
-
-
-)
+})
 
 db.locales.insertMany([
     {
         nombre: "local 1",
-        adminId: ObjectId("64d26d1e0900c20b3b9db0e8"),
+        adminId: ObjectId("64e84bc7c5ee534624c7c634"),
         direccion: {
             departamento: "santander",
             barrio: "san carlos",
@@ -229,7 +239,51 @@ db.locales.insertMany([
                 tiempoEstimado: 10,
                 costoEnvio: 10
             }
-        ]
+        ],
+        permisos: {
+            "/locales": ["1.0.0"]
+        }
+    },
+    {
+        nombre: "local 2",
+        adminId: ObjectId("64e84172e3cd19b03f41cf84"),
+        direccion: {
+            departamento: "santander",
+            barrio: "san juan",
+            comentario: "algun comentario",
+            clave: "12a #12-22"
+        },
+        estrellas: 3,
+        vip: true,
+        categorias: ["comida"],
+        horario: [
+            {
+                dia: "martes",
+                horas: "12am - 8am"
+            }
+        ],
+        activo: 1,
+        faq: [
+            {
+                pregunta: "alguna pregunta",
+                respuesta: "alguna respuesta"
+            }
+        ],
+        productos: [
+            {
+                _id: new ObjectId(),
+                name: "producto 1",
+                precio: 200,
+                descripcion: "alguna descripcion",
+                descuento: 1,
+                categorias: ["alguna categoria"],
+                tiempoEstimado: 11,
+                costoEnvio: 13
+            }
+        ],
+        permisos: {
+            "/locales": ["1.0.0","1.0.2"]
+        }
     }
 ])
 
