@@ -3,6 +3,7 @@ import Usuarios from "../../services/usuarios.js";
 import { validate } from "../../validations/validateService.js";
 import routesVersioning  from 'express-routes-versioning';
 import passportHelper from "../../config/passportHelpert.js";
+import Locales from "../../services/locales.js"
 
 const router = Router()
 const versiones = routesVersioning()
@@ -10,6 +11,8 @@ const versiones = routesVersioning()
 router.use(passportHelper.authenticate('bearer', {session: false}));
 
 router.get('/', versiones({ "1.0.0": validate(Usuarios.getUsuarios),"1.0.1": validate(Usuarios.getUsuarios),"1.0.2": validate(Usuarios.getUsuarios) }));
+
+router.post('/agregar/local', versiones({"1.0.0": validate(Locales.postLocal)}));
 
 router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Usuarios.putUsuarios) }));
 

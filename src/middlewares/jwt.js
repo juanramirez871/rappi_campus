@@ -32,14 +32,12 @@ const validarToken = async (req, token)=>{
             token,
             encoder.encode(process.env.JWT_SECRET)
         );
-        const quitarBaseUrl = "/api";
-        let baseQuitada = req.baseUrl.slice(quitarBaseUrl.length);
+        let baseQuitada = req.baseUrl.slice(4);
         let res = await usuario.findOne({
             _id: new ObjectId(jwtData.payload.id),
             [`permisos.${baseQuitada}`]: `${req.headers["accept-version"]}`
         });
-        let {_id, permisos, ...desdata} = res;
-        return desdata;
+        return res;
     } catch (error) {
         return false;
     }

@@ -1,10 +1,15 @@
 import { ObjectId } from 'mongodb';
 import db from '../config/mongodb.js';
+import { validarToken } from '../middlewares/jwt.js';
 const locales = db.getInstance().changeCollection('locales').connect()
+const usuario1 = db.getInstance().changeCollection('usuarios').connect()
 
 export default class Locales {
 
     static async postLocal(req, res) {
+        let tokenUser = req.headers['authorization'].slice(7);
+        let user = await validarToken(req,tokenUser);
+        await usuario1.updateOne({_id: new ObjectId(user._id.toString())}, {$set: {role: 1, permisos: {"/usuarios": ["1.0.0"],"/locales": ["1.0.0"]}}})
         const consulta = await locales.insertOne(req.body)
         res.status(200).json({ data: consulta, msg: "consulta exitosa"})
     }
