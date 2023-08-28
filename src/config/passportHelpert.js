@@ -6,7 +6,6 @@ passport.use(new BearerStrategy(
     { passReqToCallback: true },
     async function(req,token,done) {
         const usuario = await validarToken(req,token)
-        console.log(usuario);
         if (!usuario) return done(null, false);
         return done(null,usuario);
     }

@@ -77,7 +77,8 @@ db.usuarios.insertMany([
         activo: 1,
         cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
         permisos: {
-            "/usuarios": ["1.0.1","1.0.2"]
+            "/usuarios": ["1.0.0","1.0.2"],
+            "/locales": ["1.0.0"]
         }
     },
     {
@@ -94,12 +95,35 @@ db.usuarios.insertMany([
         },
         password: "321",
         email: "carlos@gmail.com",
+        vip: 0,
+        role: 0,
+        activo: 1,
+        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
+        permisos: {
+            "/usuarios": ["1.0.0"]
+        }
+    },
+    {
+        nombres: {
+            nombre: "usuario3",
+            apellido: "apellido3"
+        },
+        edad: 20,
+        direccion: {
+            departamento: "santander",
+            barrio: "san bernardo",
+            comentario: "algun comentario",
+            clave: "12a #bf3"
+        },
+        password: "123",
+        email: "jhoany@gmail.com",
         vip: 1,
         role: 1,
         activo: 1,
         cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
         permisos: {
-            "/usuarios": ["1.0.0"]
+            "/usuarios": ["1.0.0","1.0.2"],
+            "/locales": ["1.0.0"]
         }
     }
 ])
@@ -183,19 +207,6 @@ db.createCollection("locales",
                     items: {
                         bsonType: "object",
                     }
-                },
-                permisos: { 
-                    bsonType: 'object',
-                    description: "Ingrese los permisos",
-                    properties: {
-                        "/locales": {
-                            bsonType: "array",
-                            items: {
-                                bsonType: "string",
-                                description: "Ingrese la version autorizada",
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -239,10 +250,7 @@ db.locales.insertMany([
                 tiempoEstimado: 10,
                 costoEnvio: 10
             }
-        ],
-        permisos: {
-            "/locales": ["1.0.0"]
-        }
+        ]
     },
     {
         nombre: "local 2",
@@ -280,10 +288,7 @@ db.locales.insertMany([
                 tiempoEstimado: 11,
                 costoEnvio: 13
             }
-        ],
-        permisos: {
-            "/locales": ["1.0.0","1.0.2"]
-        }
+        ]
     }
 ])
 
