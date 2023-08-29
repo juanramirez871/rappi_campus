@@ -33,11 +33,11 @@ Rappi establece colaboraciones estratégicas con diversos establecimientos comer
 
 #### Metodos GET
 
-| metodo   | url                                                    |body          |
-| GET      | http://127.10.10.10:3000/api/locales/horarios/:idLocal | NO           |
-| GET      | http://127.10.10.10:3000/api/locales/categorias        | ["alguna categoria", "alguna categoria2"]
-| GET      | http://127.10.10.10:3000/api/productos/categorias        | ["alguna categoria", "alguna categoria2"]  |
-| GET      | http://127.10.10.10:3000/api/domiciliario/:idDomiciliario/pedidos | NO           |
+| metodo   | url                                                               |body                                        | Descripcion
+| GET      | http://127.10.10.10:3000/api/locales/horarios/:idLocal            | NO                                         | Trae el horario de un local |
+| GET      | http://127.10.10.10:3000/api/locales/categorias                   | ["alguna categoria", "alguna categoria2"]  | Trae todos los locales que esten en la categoras dichas |
+| GET      | http://127.10.10.10:3000/api/productos/categorias                 | ["alguna categoria", "alguna categoria2"]  | Trae todos los productos que esten en la categoras dichas |
+| GET      | http://127.10.10.10:3000/api/domiciliario/:idDomiciliario/pedidos | NO                                         | Trae el numero de domiclios ha hecho el domicliarios especificado
 
 
 #### Metodos POST
