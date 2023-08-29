@@ -16,8 +16,6 @@ router.post('/agregar', versiones({ "^1.0.0": validate(Locales.postLocal) }));
 
 router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
 
-router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
-
 router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Locales.putLocal) }));
 
 router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));

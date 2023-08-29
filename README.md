@@ -43,8 +43,19 @@ Rappi establece colaboraciones estratégicas con diversos establecimientos comer
 
 #### Metodos POST
 
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
+| POST      | http://127.10.10.10:3000/api/cupones                             | {"nombre":"cupon 1","descuento": 100, "tiempoValido": "100d"} | Agrega un nuevo cupon            |
+| POST      | http://127.10.10.10:3000/api/locales/:idLocal/producto           | {"name": "producto 1", "precio": 100, "descripcion": "alguna descripcion", "descuento": 1, "categorias": ["alguna categoria"],"tiempoEstimado": 10, "costoEnvio": 10} | Agrega un nuevo producto a un local                               |
+
 
 #### Metodos PUT
 
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
+
 
 #### Metodos DELETE
+
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
