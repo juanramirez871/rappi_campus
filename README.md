@@ -28,3 +28,22 @@ Además de la entrega de alimentos, Rappi ha diversificado su oferta para inclui
 3. Colaboración con Comercios
 
 Rappi establece colaboraciones estratégicas con diversos establecimientos comerciales, tales como restaurantes, supermercados y tiendas. Esta colaboración permite a Rappi ofrecer un catálogo extenso de productos y servicios. Los usuarios pueden elegir entre una amplia gama de opciones gracias a estas asociaciones.
+
+### Documentacion de las APIS
+
+#### Metodos GET
+
+| metodo   | url                                                    |body          |
+| GET      | http://127.10.10.10:3000/api/locales/horarios/:idLocal | NO           |
+| GET      | http://127.10.10.10:3000/api/locales/categorias        | ["alguna categoria", "alguna categoria2"]
+| GET      | http://127.10.10.10:3000/api/productos/categorias        | ["alguna categoria", "alguna categoria2"]  |
+| GET      | http://127.10.10.10:3000/api/domiciliario/:idDomiciliario/pedidos | NO           |
+
+
+#### Metodos POST
+
+
+#### Metodos PUT
+
+
+#### Metodos DELETE
