@@ -2,21 +2,23 @@ import { Router } from "express";
 import Usuarios from "../../services/usuarios.js";
 import { validate } from "../../validations/validateService.js";
 import routesVersioning  from 'express-routes-versioning';
+import passportHelper from "../../config/passportHelpert.js";
+import Locales from "../../services/locales.js"
 
 const router = Router()
 const versiones = routesVersioning()
 
-router.post('/agregar', versiones({ "^1.0.0": validate(Usuarios.postUsuarios) }));
+router.use(passportHelper.authenticate('bearer', {session: false}));
 
-router.get('/obtener', versiones({ "^1.0.0": validate(Usuarios.getUsuarios) }));
+router.post('/agregar/local', versiones({"1.0.0": validate(Locales.postLocal)}));
 
-router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Usuarios.putUsuarios) }));
+router.put('/actualizar', versiones({ "1.0.0": validate(Usuarios.putUsuarios) }));
 
-router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Usuarios.deleteUsuarios) }));
+router.delete('/eliminar', versiones({ "1.0.0": validate(Usuarios.deleteUsuarios) }));
 
-router.get('/obtener/:id', versiones({ "^1.0.0": validate(Usuarios.getUsuariosById) }));
+router.get('/perfil', versiones({ "1.0.0": validate(Usuarios.getUsuariosById) }));
 
-router.get('/obtener/pedidos/:id', versiones({ "^1.0.0": validate(Usuarios.getPedidosByUsuarioId) }));
+router.get('/obtener/pedidos', versiones({ "1.0.0": validate(Usuarios.getPedidosByUsuarioId) }));
 
 router.post('/agregar/pedidos', versiones({ "^1.0.0": validate(Usuarios.postUsuarioPedido) }));
 

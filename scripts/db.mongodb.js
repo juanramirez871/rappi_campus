@@ -1,13 +1,12 @@
 import { ObjectId } from "mongodb"
 
-use("rappi-campus")
-
+use("rappi-campus");
 db.createCollection("usuarios",
 {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["nombres", "edad", "password", "email", "vip", "role"],
+            required: ["nombres", "edad", "password", "email", "vip"],
             properties: {
                 nombres: {
                     bsonType: "object",
@@ -39,12 +38,24 @@ db.createCollection("usuarios",
                 cupones: {
                     bsonType: "array",
                     items: { bsonType: "objectId", description: "El campo cupones debe ser una matriz de ObjectIds." }
+                },
+                permisos: { 
+                    bsonType: 'object',
+                    description: "Ingrese los permisos",
+                    properties: {
+                        "/usuarios": {
+                            bsonType: "array",
+                            items: {
+                                bsonType: "string",
+                                description: "Ingrese la version autorizada",
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-}
-)
+});
 
 db.usuarios.insertMany([
     {
@@ -64,7 +75,56 @@ db.usuarios.insertMany([
         vip: 1,
         role: 1,
         activo: 1,
-        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")]
+        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
+        permisos: {
+            "/usuarios": ["1.0.0"],
+            "/locales": ["1.0.0"]
+        }
+    },
+    {
+        nombres: {
+            nombre: "usuario2",
+            apellido: "apellido2"
+        },
+        edad: 19,
+        direccion: {
+            departamento: "santander",
+            barrio: "villa luz",
+            comentario: "algun comentariox2",
+            clave: "12a #bf2"
+        },
+        password: "321",
+        email: "carlos@gmail.com",
+        vip: 0,
+        role: 0,
+        activo: 1,
+        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
+        permisos: {
+            "/usuarios": ["1.0.0"]
+        }
+    },
+    {
+        nombres: {
+            nombre: "usuario3",
+            apellido: "apellido3"
+        },
+        edad: 20,
+        direccion: {
+            departamento: "santander",
+            barrio: "san bernardo",
+            comentario: "algun comentario",
+            clave: "12a #bf3"
+        },
+        password: "123",
+        email: "jhoany@gmail.com",
+        vip: 1,
+        role: 1,
+        activo: 1,
+        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
+        permisos: {
+            "/usuarios": ["1.0.0"],
+            "/locales": ["1.0.0"]
+        }
     }
 ])
 
@@ -103,6 +163,7 @@ db.createCollection("locales",
             required: ["nombre", "direccion", "estrellas", "vip", "categorias", "horario", "activo"],
             properties: {
                 nombre: { bsonType: "string", description: "El nombre del local es obligatorio y debe ser de tipo string." },
+                adminId: { bsonType: "string" },
                 direccion: {
                     bsonType: "object",
                     required: ["departamento", "barrio", "clave"],
@@ -151,15 +212,12 @@ db.createCollection("locales",
             }
         }
     }
-}
-
-
-)
+})
 
 db.locales.insertMany([
     {
         nombre: "local 1",
-        adminId: ObjectId("64d26d1e0900c20b3b9db0e8"),
+        adminId: "64e84bc7c5ee534624c7c634",
         direccion: {
             departamento: "santander",
             barrio: "san carlos",
@@ -192,6 +250,44 @@ db.locales.insertMany([
                 categorias: ["alguna categoria"],
                 tiempoEstimado: 10,
                 costoEnvio: 10
+            }
+        ]
+    },
+    {
+        nombre: "local 2",
+        adminId: "64e84172e3cd19b03f41cf84",
+        direccion: {
+            departamento: "santander",
+            barrio: "san juan",
+            comentario: "algun comentario",
+            clave: "12a #12-22"
+        },
+        estrellas: 3,
+        vip: true,
+        categorias: ["comida"],
+        horario: [
+            {
+                dia: "martes",
+                horas: "12am - 8am"
+            }
+        ],
+        activo: 1,
+        faq: [
+            {
+                pregunta: "alguna pregunta",
+                respuesta: "alguna respuesta"
+            }
+        ],
+        productos: [
+            {
+                _id: new ObjectId(),
+                name: "producto 1",
+                precio: 200,
+                descripcion: "alguna descripcion",
+                descuento: 1,
+                categorias: ["alguna categoria"],
+                tiempoEstimado: 11,
+                costoEnvio: 13
             }
         ]
     }
