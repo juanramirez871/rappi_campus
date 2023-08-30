@@ -24,8 +24,8 @@ router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Locales.deleteLoca
 
 router.get('/horarios/:id', versiones({ "^1.0.0": validate(Locales.getHorario) }));
 
+router.get('/obtener/local/departamento/:departamento',versiones({ "^1.0.0": validate(Locales.getLocalesDepartamento) }));
 
-
-
+router.get('/obtener/local/barrio/:barrio',versiones({ "^1.0.0": validate(Locales.getLocalesBarrio) }));
 
 export { router };

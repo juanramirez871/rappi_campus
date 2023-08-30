@@ -54,4 +54,13 @@ export default class Locales {
 
         res.json(data)
     }
+
+    static async getLocalesDepartamento(req, res){
+        const data = await locales.find({ "direccion.departamento": req.params.departamento }).toArray()
+        res.json(data)
+    }
+    static async getLocalesBarrio(req, res){
+        const data = await locales.find({ "direccion.barrio": req.params.barrio }).toArray()
+        res.json(data)
+    }
 }
