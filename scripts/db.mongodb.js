@@ -19,6 +19,7 @@ db.createCollection("usuarios",
                 edad: { bsonType: "int", minimum: 0, description: "La edad es obligatoria y debe ser un número entero." },
                 direccion: {
                     bsonType: "object",
+                    required: ["departamento", "barrio", "clave"],
                     properties: {
                         departamento: { bsonType: "string", description: "El departamento debe ser de tipo string." },
                         barrio: { bsonType: "string", description: "El barrio debe ser de tipo string." },
@@ -33,7 +34,7 @@ db.createCollection("usuarios",
                     description: "El email es obligatorio"
                 },
                 vip: { bsonType: "int", enum: [0, 1], description: "El campo VIP es obligatorio y debe ser 0 o 1." },
-                role: { bsonType: "int", enum: [0, 1], description: "El campo role es obligatorio y debe ser 0 o 1." },
+                role: { bsonType: "int", description: "El campo role es obligatorio." },
                 activo: { bsonType: "int", enum: [0, 1], description: "El campo activo es obligatorio y debe ser 0 o 1." },
                 cupones: {
                     bsonType: "array",
