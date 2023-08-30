@@ -28,3 +28,34 @@ Además de la entrega de alimentos, Rappi ha diversificado su oferta para inclui
 3. Colaboración con Comercios
 
 Rappi establece colaboraciones estratégicas con diversos establecimientos comerciales, tales como restaurantes, supermercados y tiendas. Esta colaboración permite a Rappi ofrecer un catálogo extenso de productos y servicios. Los usuarios pueden elegir entre una amplia gama de opciones gracias a estas asociaciones.
+
+### Documentacion de las APIS
+
+#### Metodos GET
+
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
+| GET      | http://127.10.10.10:3000/api/locales/horarios/:idLocal            | NO                                         | Trae el horario de un local                                       |
+| GET      | http://127.10.10.10:3000/api/locales/categorias                   | ["alguna categoria", "alguna categoria2"]  | Trae todos los locales que esten en la categoras dichas           |
+| GET      | http://127.10.10.10:3000/api/productos/categorias                 | ["alguna categoria", "alguna categoria2"]  | Trae todos los productos que esten en la categoras dichas         |
+| GET      | http://127.10.10.10:3000/api/domiciliario/:idDomiciliario/pedidos | NO                                         | Trae el numero de domiclios ha hecho el domicliarios especificado |
+
+
+#### Metodos POST
+
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
+| POST      | http://127.10.10.10:3000/api/cupones                             | {"nombre":"cupon 1","descuento": 100, "tiempoValido": "100d"} | Agrega un nuevo cupon            |
+| POST      | http://127.10.10.10:3000/api/locales/:idLocal/producto           | {"name": "producto 1", "precio": 100, "descripcion": "alguna descripcion", "descuento": 1, "categorias": ["alguna categoria"],"tiempoEstimado": 10, "costoEnvio": 10} | Agrega un nuevo producto a un local                               |
+
+
+#### Metodos PUT
+
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
+
+
+#### Metodos DELETE
+
+| metodo   | url                                                               |body                                        | Descripcion                                                       |
+|----------|-------------------------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------|
