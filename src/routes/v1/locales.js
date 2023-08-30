@@ -11,10 +11,20 @@ router.use(passportHelper.authenticate('bearer', {session: false}));
 
 router.get('/info', versiones({ "^1.0.0": validate(Locales.getLocalById)}));
 
-router.post('/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
+router.get('/obtener', versiones({ "^1.0.0": validate(Locales.getLocal) }));
 
-router.put('/actualizar', versiones({ "^1.0.0": validate(Locales.putLocal)}));
+router.get('/obtener/:id', versiones({ "^1.0.0": validate(Locales.getLocalById) }));
 
-router.delete('/eliminar', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));
+router.get('/categorias', versiones({ "^1.0.0": validate(Locales.getLocalesByCategory) }));
+
+router.post('/agregar', versiones({ "^1.0.0": validate(Locales.postLocal) }));
+
+router.post('/:id/producto', versiones({ "^1.0.0": validate(Locales.postProductoLocal) }));
+
+router.put('/actualizar/:id', versiones({ "^1.0.0": validate(Locales.putLocal) }));
+
+router.delete('/eliminar/:id', versiones({ "^1.0.0": validate(Locales.deleteLocal) }));
+
+router.get('/horarios/:id', versiones({ "^1.0.0": validate(Locales.getHorario) }));
 
 export { router };

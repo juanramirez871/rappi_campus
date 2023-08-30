@@ -20,4 +20,14 @@ router.get('/perfil', versiones({ "1.0.0": validate(Usuarios.getUsuariosById) })
 
 router.get('/obtener/pedidos', versiones({ "1.0.0": validate(Usuarios.getPedidosByUsuarioId) }));
 
+router.post('/agregar/pedidos', versiones({ "^1.0.0": validate(Usuarios.postUsuarioPedido) }));
+
+router.delete('/eliminar/pedidos/:id/:usuarioId', versiones({ "^1.0.0": validate(Usuarios.deleteUsuarioPedido) }));
+
+router.put('/actualizar/estado/pedido/:id/:usuarioId/:estado', versiones({ "^1.0.0": validate(Usuarios.updateEstadoPedido) }));
+
+router.get('/obtener/recibo/:id/:usuarioId',versiones({ "^1.0.0": validate(Usuarios.getReciboPedido) }));
+
+router.get('/domiciliario/:id/pedidos',versiones({ "^1.0.0": validate(Usuarios.countorders) }));
+
 export { router };

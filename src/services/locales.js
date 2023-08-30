@@ -60,4 +60,11 @@ export default class Locales {
             res.status(200).send({ status: 200, message: "consulta exitosa"})
         }
     }
+
+    static async getHorario(req, res){
+
+        const data = await locales.find({ _id: new ObjectId(req.params.id) }).project({ horario: 1 }).toArray()
+
+        res.json(data)
+    }
 }

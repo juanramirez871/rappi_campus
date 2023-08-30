@@ -2,6 +2,8 @@ import db from '../config/mongodb.js';
 import { ObjectId } from 'mongodb';
 import { traerUserLogin } from "../utils/globalFunciones.js"
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
+const Pedido = db.getInstance().changeCollection('pedidos').connect()
+
 
 export default class Usuarios {
     static async postUsuarios(req, res) {
@@ -61,5 +63,53 @@ export default class Usuarios {
         })
 
         res.status(200).json({ productos, pedido: consultaPedidos });
+    }
+    static async postUsuarioPedido(req, res){
+        const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        let consulta = await pedidos.insertOne(req.body)
+        res.status(200).json(consulta)
+    }
+    static async deleteUsuarioPedido(req, res) {
+        const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        try {
+            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId},{$set: { activo: 0 }});
+            if (consulta.matchedCount === 1) {
+                res.status(200).json({ msg: "Pedido desactivado exitosamente" });
+            } else {
+                res.status(404).json({ msg: "Pedido no encontrado o no pertenece al usuario" });
+            }
+        } catch (error) {
+            res.status(500).json({ msg: "Error en el servidor" });
+        }
+    }
+    static async updateEstadoPedido(req, res) {
+        const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        try {
+            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId},{$set: { estado: parseInt(req.params.estado) }});
+            if (consulta.matchedCount === 1) {
+                res.status(200).json({ msg: "Pedido cambio de estado exitosamente" });
+            } else {
+                res.status(404).json({ msg: "Pedido no encontrado o no pertenece al usuario" });
+            }
+        } catch (error) {
+            res.status(500).json({ msg: "Error en el servidor" });
+        }
+    }
+    static async getReciboPedido(req, res) {
+        const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        const consulta = await pedidos.findOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId});
+        if (consulta.descuentoTotal != 0) {
+            consulta.constoConDescuento = consulta.costoTotal-((consulta.costoTotal*consulta.descuentoTotal)/100)
+            res.status(200).json(consulta);
+        }else{
+            consulta.constoConDescuento = consulta.costoTotal
+            res.status(200).json(consulta);
+        }
+        
+    }
+    static async countorders(req, res){
+
+        const data = await Pedido.find({ domiciliarioId: req.params.id }).count()
+        res.json({ msg: "domiciliario ha hecho estos domicilios", domicilios: data })
     }
 }
