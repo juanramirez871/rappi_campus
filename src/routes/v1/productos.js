@@ -8,4 +8,6 @@ const versiones = routesVersioning()
 
 router.get('/categorias', versiones({ "^1.0.0": validate(Productos.getCategorias) }));
 
+router.get('/mejoresProductos', versiones({ "^1.0.0": validate(Productos.getMejoresProductos)}))
+
 export { router };
