@@ -66,6 +66,8 @@ export default class Usuarios {
     }
     static async postUsuarioPedido(req, res){
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
+        let user = await traerUserLogin(req)
+        req.body.usuarioId = user._id.toString()
         let consulta = await pedidos.insertOne(req.body)
         res.status(200).json(consulta)
     }
