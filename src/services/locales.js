@@ -64,8 +64,8 @@ export default class Locales {
 
         if(!req.body?.categorias?.[0]) res.status(400).send({ status: 400, message: "categorias es requerido y de tipo array"});
         else {
-            await locales.find({ categorias: { $in: req.body.categorias } }).toArray();
-            res.status(200).send({ status: 200, message: "consulta exitosa"})
+            const data = await locales.find({ categorias: { $in: req.body.categorias } }).toArray();
+            res.status(200).send({ status: 200, data })
         }
     }
 

@@ -56,6 +56,7 @@ export default class Usuarios {
         const locales = db.getInstance().changeCollection('locales').connect();
         let user = await traerUserLogin(req);
         let consultaPedidos = await pedidos.find({ usuarioId: user._id.toString() }).toArray();
+        if(consultaPedidos.length == 0) return res.status(400).json({ msg: "No ha hecho ningun pedido el usuario" })
         let consultaLocales = await locales.aggregate([
             {
                 $match: { _id: new ObjectId(consultaPedidos[0].localId) },
@@ -86,20 +87,21 @@ export default class Usuarios {
     static async deleteUsuarioPedido(req, res) {
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
         try {
-            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId},{$set: { activo: 0 }});
+            let user = await traerUserLogin(req);
+            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id),usuarioId: user._id.toString()},{$set: { activo: 0 }});
             if (consulta.matchedCount === 1) {
                 res.status(200).json({ msg: "Pedido desactivado exitosamente" });
             } else {
                 res.status(404).json({ msg: "Pedido no encontrado o no pertenece al usuario" });
             }
         } catch (error) {
-            res.status(500).json({ msg: "Error en el servidor" });
+            res.status(500).json({ msg: "Id no existe" });
         }
     }
     static async updateEstadoPedido(req, res) {
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
         try {
-            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId},{$set: { estado: parseInt(req.params.estado) }});
+            const consulta = await pedidos.updateOne({_id: new ObjectId(req.params.id)},{$set: { estado: parseInt(req.params.estado) }});
             if (consulta.matchedCount === 1) {
                 res.status(200).json({ msg: "Pedido cambio de estado exitosamente" });
             } else {
@@ -111,7 +113,9 @@ export default class Usuarios {
     }
     static async getReciboPedido(req, res) {
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
-        const consulta = await pedidos.findOne({_id: new ObjectId(req.params.id),usuarioId: req.params.usuarioId});
+        let user = await traerUserLogin(req);
+        const consulta = await pedidos.findOne({_id: new ObjectId(req.params.id),usuarioId: user._id.toString() });
+        if(!consulta) return res.status(400).json({ msg: "No tienes ese pedido" })
         if (consulta.descuentoTotal != 0) {
             consulta.constoConDescuento = consulta.costoTotal-((consulta.costoTotal*consulta.descuentoTotal)/100)
             res.status(200).json(consulta);

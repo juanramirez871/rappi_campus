@@ -38,11 +38,11 @@ Rappi establece colaboraciones estratégicas con diversos establecimientos comer
 | GET    | http://127.10.10.10:3000/api/locales/horarios/:idLocal       | NO                                        | Trae el horario de un local                                  |
 | GET    | http://127.10.10.10:3000/api/locales/categorias              | ["alguna categoria", "alguna categoria2"] | Trae todos los locales que esten en la categoras dichas      |
 | GET    | http://127.10.10.10:3000/api/productos/categorias            | ["alguna categoria", "alguna categoria2"] | Trae todos los productos que esten en la categoras dichas    |
-| GET    | http://127.10.10.10:3000/api/domiciliario/:idDomiciliario/pedidos | NO                                        | Trae el numero de domicilios ha hecho el domiciliarios especificado |
+| GET    | http://127.10.10.10:3000/api/usuarios/domiciliario/:idDomiciliario/pedidos | NO                                        | Trae el numero de domicilios ha hecho el domiciliarios especificado |
 | GET    | http://127.10.10.10:3000/api/locales/obtener                 | NO                                        | Trae todos los locales con su respectiva información         |
 | GET    | http://127.10.10.10:3000/api/locales/obtener/Local           | NO                                        | Trae un local en especifico según el id del Token generado   |
 | GET    | http://127.10.10.10:3000/api/usuarios/obtener/pedidos        | NO                                        | Trae un pedido en especifico según el id del Token generado  |
-| *GET   | http://127.10.10.10:3000/api/usuarios/obtener/recibo/:id/:usuarioId | NO                                        | Trae un recibo detallado de pedido                           |
+| GET   | http://127.10.10.10:3000/api/usuarios/obtener/recibo/:id | NO                                        | Trae un recibo detallado de pedido                           |
 | GET    | http://127.10.10.10:3000/api/locales/obtener/local/departamento/:departamento | NO                                        | Trae los locales por departamento                            |
 | GET    | http://127.10.10.10:3000/api/locales/obtener/local/barrio/:barrio | NO                                        | Trae los locales por barrio                                  |
 
@@ -68,4 +68,4 @@ Rappi establece colaboraciones estratégicas con diversos establecimientos comer
 | metodo  | url                                                          | body | Descripcion       |
 | ------- | ------------------------------------------------------------ | ---- | ----------------- |
 | DELETE  | http://127.10.10.10:3000/api/locales/eliminar                | NO   | Elimina un local  |
-| *DELETE | http://127.10.10.10:3000/api/usuarios/eliminar/pedidos/:id/:usuarioId | NO   | Elimina un pedido |
+| DELETE | http://127.10.10.10:3000/api/usuarios/eliminar/pedidos/:id | NO   | Elimina un pedido |
