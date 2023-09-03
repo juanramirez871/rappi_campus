@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 import { traerUserLogin } from "../utils/globalFunciones.js"
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
 const Pedido = db.getInstance().changeCollection('pedidos').connect()
-
+const locales = db.getInstance().changeCollection('locales').connect()
 
 export default class Usuarios {
     static async postUsuarios(req, res) {
@@ -29,6 +29,7 @@ export default class Usuarios {
         let user = await traerUserLogin(req);
         if(req.body.confirmacion == "confirmar"){
             await usuarios.updateOne({ _id: new ObjectId(user._id.toString()) }, { $set: { activo: 0 } })
+            await locales.updateOne({ adminId: user._id.toString(), activo: 1 }, { $set: { activo: 0 } });
             return res.status(200).send({status: 200, message: "Usuario eliminado con exito"});
         }else{
             return res.status(400).send({status: 400, message: "Para eliminar la cuenta necesita colocar confirmacion: confirmar"})
