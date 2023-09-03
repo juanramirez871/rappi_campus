@@ -43,6 +43,14 @@ export default class Usuarios {
         let {_id,activo,role,permisos, ...data} = user;
         res.status(200).send({status: 200,message: data})
     }
+
+    static async getUsuarioBusqueda(req, res) {
+        if(req.body.id && !req.body.email) return res.status(400).send({status:400,message:"Para buscar, coloque en el body cualquiera de estas(email: emailDelUsuario || id: idDelUsuario"})
+        const consulta = await usuarios.findOne({$or:[{_id: new ObjectId(req.body.id)},{email: req.body.email}]})
+        let {password, ...data} = consulta
+        res.status(200).send({ status: 200, message: data})
+    }
+
     static async getPedidosByUsuarioId(req, res) {
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
         const locales = db.getInstance().changeCollection('locales').connect();
