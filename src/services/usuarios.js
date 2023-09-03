@@ -1,9 +1,10 @@
 import db from '../config/mongodb.js';
 import { ObjectId } from 'mongodb';
 import { traerUserLogin } from "../utils/globalFunciones.js"
+import { quitarId } from "../utils/globalFunciones.js"
 const usuarios = db.getInstance().changeCollection('usuarios').connect()
 const Pedido = db.getInstance().changeCollection('pedidos').connect()
-
+const locales = db.getInstance().changeCollection('locales').connect()
 
 export default class Usuarios {
     static async postUsuarios(req, res) {
@@ -15,9 +16,11 @@ export default class Usuarios {
         await usuarios.insertOne(req.body);
         res.status(200).send({status: 200, message: "Usuario registrado con exito"});
     }
-    static async getUsuarios(res) {
-        let consulta = await usuarios.find({}).toArray()
-        res.status(200).json(consulta)
+    static async getUsuarios(req,res) {
+        let user = await traerUserLogin(req);
+        const consulta = await usuarios.find({role: {$lt:user.role}}).toArray();
+        const data = quitarId(consulta);
+        res.status(200).send(data)
     }
     static async putUsuarios(req, res) {
         if((req.body.role)||(req.body.permisos)||(req.body.activo)) return res.status(400).send("No es valido el dato enviado, no se puede cambiar");
@@ -29,6 +32,7 @@ export default class Usuarios {
         let user = await traerUserLogin(req);
         if(req.body.confirmacion == "confirmar"){
             await usuarios.updateOne({ _id: new ObjectId(user._id.toString()) }, { $set: { activo: 0 } })
+            await locales.updateOne({ adminId: user._id.toString(), activo: 1 }, { $set: { activo: 0 } });
             return res.status(200).send({status: 200, message: "Usuario eliminado con exito"});
         }else{
             return res.status(400).send({status: 400, message: "Para eliminar la cuenta necesita colocar confirmacion: confirmar"})
@@ -39,6 +43,14 @@ export default class Usuarios {
         let {_id,activo,role,permisos, ...data} = user;
         res.status(200).send({status: 200,message: data})
     }
+
+    static async getUsuarioBusqueda(req, res) {
+        if(req.body.id && !req.body.email) return res.status(400).send({status:400,message:"Para buscar, coloque en el body cualquiera de estas(email: emailDelUsuario || id: idDelUsuario"})
+        const consulta = await usuarios.findOne({$or:[{_id: new ObjectId(req.body.id)},{email: req.body.email}]})
+        let {password, ...data} = consulta
+        res.status(200).send({ status: 200, message: data})
+    }
+
     static async getPedidosByUsuarioId(req, res) {
         const pedidos = db.getInstance().changeCollection('pedidos').connect();
         const locales = db.getInstance().changeCollection('locales').connect();

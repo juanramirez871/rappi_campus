@@ -34,7 +34,7 @@ db.createCollection("usuarios",
                     description: "El email es obligatorio"
                 },
                 vip: { bsonType: "int", enum: [0, 1], description: "El campo VIP es obligatorio y debe ser 0 o 1." },
-                role: { bsonType: "int", description: "El campo role es obligatorio." },
+                role: { bsonType: "int", enum: [0, 4], description: "El campo role es obligatorio." },
                 activo: { bsonType: "int", enum: [0, 1], description: "El campo activo es obligatorio y debe ser 0 o 1." },
                 cupones: {
                     bsonType: "array",
@@ -58,73 +58,29 @@ db.createCollection("usuarios",
     }
 });
 
+
 db.usuarios.insertMany([
     {
         nombres: {
-            nombre: "usuario1",
-            apellido: "apellido1"
+            nombre: "Ludwing",
+            apellido: "Admin"
         },
-        edad: 18,
+        edad: 50,
         direccion: {
             departamento: "santander",
-            barrio: "san carlos",
+            barrio: "san justo y bueno",
             comentario: "algun comentario",
-            clave: "12a #bf"
+            clave: "12a #bfAdmin"
         },
-        password: "123",
-        email: "juan@gmail.com",
+        password: "321123",
+        email: "ludsan@gmail.com",
         vip: 1,
-        role: 1,
+        role: 4,
         activo: 1,
         cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
         permisos: {
-            "/usuarios": ["1.0.0"],
-            "/locales": ["1.0.0"]
-        }
-    },
-    {
-        nombres: {
-            nombre: "usuario2",
-            apellido: "apellido2"
-        },
-        edad: 19,
-        direccion: {
-            departamento: "santander",
-            barrio: "villa luz",
-            comentario: "algun comentariox2",
-            clave: "12a #bf2"
-        },
-        password: "321",
-        email: "carlos@gmail.com",
-        vip: 0,
-        role: 0,
-        activo: 1,
-        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
-        permisos: {
-            "/usuarios": ["1.0.0"]
-        }
-    },
-    {
-        nombres: {
-            nombre: "usuario3",
-            apellido: "apellido3"
-        },
-        edad: 20,
-        direccion: {
-            departamento: "santander",
-            barrio: "san bernardo",
-            comentario: "algun comentario",
-            clave: "12a #bf3"
-        },
-        password: "123",
-        email: "jhoany@gmail.com",
-        vip: 1,
-        role: 1,
-        activo: 1,
-        cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
-        permisos: {
-            "/usuarios": ["1.0.0"],
-            "/locales": ["1.0.0"]
+            "/usuarios": ["1.0.0","1.0.1","1.0.5"],
+            "/locales": ["1.0.0","1.0.1","1.0.5"]
         }
     }
 ])

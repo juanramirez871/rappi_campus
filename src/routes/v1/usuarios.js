@@ -16,9 +16,9 @@ router.put('/actualizar', versiones({ "1.0.0": validate(Usuarios.putUsuarios) })
 
 router.delete('/eliminar', versiones({ "1.0.0": validate(Usuarios.deleteUsuarios) }));
 
-router.get('/perfil', versiones({ "1.0.0": validate(Usuarios.getUsuariosById) }));
+router.get('/info', versiones({ "1.0.0": Usuarios.getUsuariosById, "1.0.1": Usuarios.getUsuarios, "1.0.5": validate(Usuarios.getUsuarioBusqueda)}));
 
-router.get('/obtener/pedidos', versiones({ "1.0.0": validate(Usuarios.getPedidosByUsuarioId) }));
+router.get('/obtener/pedidos', versiones({ "^1.0.0": validate(Usuarios.getPedidosByUsuarioId) }));
 
 router.post('/agregar/pedidos', versiones({ "^1.0.0": validate(Usuarios.postUsuarioPedido) }));
 
