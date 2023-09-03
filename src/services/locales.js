@@ -9,9 +9,9 @@ export default class Locales {
     static async postLocal(req, res) {
         let user = await traerUserLogin(req);
         if(user.role == 1) return res.status(400).send({status:400,message:"Ya tienes un local registrado a tu nombre."})
-        await usuario1.updateOne({_id: new ObjectId(user._id.toString())}, {$set: {role: 1, permisos: {"/usuarios": ["1.0.0"],"/locales": ["1.0.0"]}}})
         req.body.adminId = user._id.toString()
         await locales.insertOne(req.body)
+        await usuario1.updateOne({_id: new ObjectId(user._id.toString())}, {$set: {role: 1, permisos: {"/usuarios": ["1.0.0"],"/locales": ["1.0.0"]}}})
         res.status(200).send({ status: 200, message: "consulta exitosa"})
     }
 
