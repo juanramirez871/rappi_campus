@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import db from '../config/mongodb.js';
 import { traerUserLogin } from "../utils/globalFunciones.js"
+import { quitarId } from "../utils/globalFunciones.js"
 const locales = db.getInstance().changeCollection('locales').connect()
 const usuario1 = db.getInstance().changeCollection('usuarios').connect()
 
@@ -8,16 +9,17 @@ export default class Locales {
 
     static async postLocal(req, res) {
         let user = await traerUserLogin(req);
-        if(user.role == 1) return res.status(400).send({status:400,message:"Ya tienes un local registrado a tu nombre."})
+        if(user.role != 0) return res.status(400).send({status:400,message:"No puedes registrar un local a su nombre."})
         req.body.adminId = user._id.toString()
         await locales.insertOne(req.body)
         await usuario1.updateOne({_id: new ObjectId(user._id.toString())}, {$set: {role: 1, permisos: {"/usuarios": ["1.0.0"],"/locales": ["1.0.0"]}}})
         res.status(200).send({ status: 200, message: "consulta exitosa"})
     }
 
-    static async getLocal(res) {
-        await locales.find({}).toArray();
-        res.status(200).send({ status: 200, message: "consulta exitosa"})
+    static async getLocal(req, res) {
+        const consulta = await locales.find({}).toArray();
+        const data = quitarId(consulta);
+        res.status(200).send(data)
     }
 
     static async putLocal(req, res) {
@@ -40,8 +42,14 @@ export default class Locales {
     static async getLocalById(req, res) {
         let user = await traerUserLogin(req);
         const consulta = await locales.findOne({ adminId: user._id.toString() })
-        console.log(consulta);
         let {_id,adminId,activo, ...data} = consulta
+        res.status(200).send({ status: 200, message: data})
+    }
+
+    static async getLocalBusqueda(req, res) {
+        if(!req.body.nombre && !req.body.id) return res.status(400).send({status:400,message:"Para buscar, coloque en el body cualquiera de estas(id: idDelLocal || nombre: nombreDelLocal)."})
+        const consulta = await locales.findOne({$or:[{nombre: req.body.nombre},{_id: new ObjectId(req.body.id)}]})
+        let {_id,adminId, ...data} = consulta
         res.status(200).send({ status: 200, message: data})
     }
 
