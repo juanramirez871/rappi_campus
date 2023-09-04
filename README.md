@@ -111,7 +111,7 @@ Ademas debes poner otra cabecera llamada *Accept-version* y especificar la versi
 | metodo | url                                                          | body                                                         | Descripcion                    | Versiones |
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ | --------- |
 | PUT    | http://127.10.10.10:3000/api/locales/actualizar              | {"nombre": "local 1","direccion": {"departamento": "santander","barrio": "san carlos","comentario": "algun comentario","clave": "12a #12-21"},"estrellas": 4,"vip": true,"categorias": ["ropa"],"horario": [{"dia": "lunes","horas": "10am - 5pm"}],"activo": 1,"faq": [{"pregunta": "alguna pregunta","respuesta": "alguna respuesta"}],"productos": []} | Actualiza un cabio del local   | 1.0.0     |
-| *PUT   | http://127.10.10.10:3000/api/usuarios/actualizar/estado/pedido/:id/:usuarioId/:estado | NO                                                           | Actualiza el estado del pedido | 1.0.0     |
+| PUT   | http://127.10.10.10:3000/api/usuarios/actualizar/estado/pedido/:id/:estado | NO                                                           | Actualiza el estado del pedido | 1.0.0     |
 
 
 #### Metodos DELETE
