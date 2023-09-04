@@ -71,7 +71,7 @@ Datos de ejemplo en el body
 
 ### Despues deberas loguearse, te recomendamos utilizar este usuario que ya es admin y tiene muchos datos de ejemplo para probar los enpoints
 
-```
+```JSON
 Metodo POST - http://127.10.10.10:3000/api/login
 {
   "correo": "ludsan@gmail.com",
@@ -82,6 +82,34 @@ Metodo POST - http://127.10.10.10:3000/api/login
 ### Te dara un token copialo en la cabecera *Authorization* asi ```bearer aqui tu token generado```
 
 Ademas debes poner otra cabecera llamada *Accept-version* y especificar la version, en este caso para el admin la por default es la ```1.0.0```
+
+
+### Para acceder a los endpoints de locales primero debes registrar un local a tu nombre
+
+```JSON
+Metodo POST - http://127.10.10.10:3000/api/usuarios/agregar/local 
+{
+  "nombre": "local 1",
+  "direccion": {
+    "departamento": "santander",
+    "barrio": "san carlos",
+    "comentario": "algun comentario",
+    "clave": "12a #12-21"
+    },
+    "estrellas": 4,
+    "vip": true,
+    "categorias": ["ropa"],
+    "horario": [{"dia": "lunes","horas": "10am - 5pm"}],
+    "activo": 1,
+    "faq": [
+      {
+        "pregunta": "alguna pregunta","respuesta": "alguna respuesta"
+      }
+    ],
+    "productos": []
+}
+```
+
 
 ### Documentacion de las APIS
 
