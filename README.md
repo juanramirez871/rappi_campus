@@ -12,7 +12,6 @@
 
 ![img](./public/img/rappi.jpg)
 
-
 El modelo de negocio de Rappi se basa en una plataforma tecnológica que conecta a usuarios con una amplia variedad de servicios y productos a través de su aplicación móvil y plataforma web. Su enfoque principal es la entrega a domicilio, donde los usuarios pueden solicitar alimentos de restaurantes locales, compras de supermercado, productos de farmacia y más. Mediante una red de repartidores conocidos como "Rappitenderos", Rappi recoge los productos de comercios asociados y los entrega directamente en las ubicaciones de los usuarios. Además, Rappi ha diversificado su oferta para incluir servicios como envío de paquetes, trámites bancarios y más, aumentando su utilidad en diferentes contextos. Su colaboración con una variedad de establecimientos comerciales y su enfoque en la innovación constante son pilares fundamentales de su modelo, permitiéndoles proporcionar soluciones convenientes y rápidas a través de pagos digitales y una experiencia de usuario simplificada.
 
 ### Pilares Fundamentales de Rappi que se usaran en el proyecto
@@ -28,6 +27,10 @@ Además de la entrega de alimentos, Rappi ha diversificado su oferta para inclui
 3. Colaboración con Comercios
 
 Rappi establece colaboraciones estratégicas con diversos establecimientos comerciales, tales como restaurantes, supermercados y tiendas. Esta colaboración permite a Rappi ofrecer un catálogo extenso de productos y servicios. Los usuarios pueden elegir entre una amplia gama de opciones gracias a estas asociaciones.
+
+# Esquema
+
+![](https://raw.githubusercontent.com/juanramirez871/rappi_campus/master/public/img/esquemaBaseDatos.png)
 
 ## Instalacion
 
