@@ -29,6 +29,54 @@ Además de la entrega de alimentos, Rappi ha diversificado su oferta para inclui
 
 Rappi establece colaboraciones estratégicas con diversos establecimientos comerciales, tales como restaurantes, supermercados y tiendas. Esta colaboración permite a Rappi ofrecer un catálogo extenso de productos y servicios. Los usuarios pueden elegir entre una amplia gama de opciones gracias a estas asociaciones.
 
+## Instalacion
+
+#### clone o descargue el repositorio donde esta leyendo esto, al tenerlo entra a la carpeta creada y ejecuta  ```npm install``` crea un nuevo archivo llamado ```.env``` y escriba dentro de el lo siguiente
+```
+URI_MONGODB = 
+PORT = 3000
+JWT_SECRET = "fklsdfjkld"
+```
+
+#### Ejecuta en la terminal ```npm run dev```
+
+### Crea un usuario para poder acceder a todos los enpoints con el siguiente enpoint
+```Metodo POST - http://127.10.10.10:3000/api/registro  ```
+Datos de ejemplo en el body
+```json
+{
+  "nombres": {
+    "nombre": "Miguel chiquito",
+    "apellido": "Backend"
+  },
+  "edad": 50,
+  "direccion": {
+    "departamento": "Piedecuesta",
+    "barrio": "san justo y bueno",
+    "comentario": "algun comentario",
+    "clave": "12a #bfAdmin"
+  },
+  "password": "123",
+  "email": "miguel2@gmail.com",
+  "vip": 1,
+  "activo": 1
+}
+```
+
+### Despues deberas loguearse, te recomendamos utilizar este usuario que ya es admin y tiene muchos datos de ejemplo para probar los enpoints
+```
+Metodo POST - http://127.10.10.10:3000/api/login
+```
+```json
+{
+  "correo": "ludsan@gmail.com",
+  "contraseña": "321123"
+}
+```
+
+### Te dara un token copialo en la cabecera *Authorization* asi ```bearer aqui tu token generado```
+Ademas debes poner otra cabecera llamada *Accept-version* y especificar la version, en este caso para el admin la por default es la ```1.0.0```
+
 ### Documentacion de las APIS
 
 #### Metodos GET
