@@ -30,4 +30,16 @@ router.get('/obtener/recibo/:id',versiones({ "^1.0.0": validate(Usuarios.getReci
 
 router.get('/domiciliario/:id/pedidos',versiones({ "^1.0.0": validate(Usuarios.countorders) }));
 
+router.get("/obtener", validate(Locales.getLocal))
+
+router.get('/categorias/locales', versiones({ "1.0.0": validate(Locales.getLocalesByCategory) }));
+
+router.post('/agregar/local', versiones({ "1.0.0": validate(Locales.postLocal) }));
+
+router.get('/horarios/:id', versiones({ "1.0.1": validate(Locales.getHorario) }));
+
+router.get('/obtener/local/departamento/:departamento',versiones({ "1.0.0": validate(Locales.getLocalesDepartamento) }));
+
+router.get('/obtener/local/barrio/:barrio',versiones({ "1.0.0": validate(Locales.getLocalesBarrio) }));
+
 export { router };
