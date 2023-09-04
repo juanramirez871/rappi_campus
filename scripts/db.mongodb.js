@@ -1,4 +1,3 @@
-
 use("rappi-campus");
 db.createCollection("usuarios",
 {
@@ -108,8 +107,6 @@ db.cupones.insertMany([
         tiempoValido: "100d"
     }
 ])
-
-use("rappi-campus")
 
 db.createCollection("locales", 
 {
@@ -249,7 +246,6 @@ db.locales.insertMany([
     }
 ])
 
-use("rappi-campus")
 db.createCollection("pedidos", 
 {
     validator: {
@@ -275,7 +271,6 @@ db.createCollection("pedidos",
 
 )
 
-use("rappi-campus")
 
 db.pedidos.insertMany([
     {
