@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb"
 
 use("rappi-campus");
 db.createCollection("usuarios",
