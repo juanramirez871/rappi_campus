@@ -25,5 +25,4 @@ export default class Connect {
         this.db = this.connection.db(this.dbName).collection(this.collectionName);
         return this.db;
     }
-
 }

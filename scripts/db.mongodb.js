@@ -77,8 +77,7 @@ db.usuarios.insertMany([
         activo: 1,
         cupones: [ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8"), ObjectId("64d26d1e0900c20b3b9db0e8")],
         permisos: {
-            "/usuarios": ["1.0.0","1.0.1","1.0.5"],
-            "/locales": ["1.0.0","1.0.1","1.0.5"]
+            "/usuarios": ["1.0.0"]
         }
     }
 ])

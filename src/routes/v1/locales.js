@@ -9,9 +9,9 @@ const versiones = routesVersioning()
 
 router.use(passportHelper.authenticate('bearer', {session: false}));
 
-router.get('/info', versiones({ "1.0.0": Locales.getLocalById, "1.0.1": Locales.getLocal, "1.0.5": validate(Locales.getLocalBusqueda)}));
+router.get('/', versiones({ "1.0.0": Locales.getLocalById, "1.0.1": Locales.getLocal, "1.0.5": validate(Locales.getLocalBusqueda)}));
 
-router.get('/obtener/Local', versiones({ "^1.0.0": validate(Locales.getLocalById) }));
+router.get('/empleados', versiones({ "^1.0.0": validate(Locales.getLocalById) }));
 
 router.post('/:id/producto', versiones({ "1.0.0": validate(Locales.postProductoLocal) }));
 
